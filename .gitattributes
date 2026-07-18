@@ -1,0 +1,3 @@
+# Hooks de git e scripts de shell precisam de LF — CRLF quebra o sh.
+scripts/git-hooks/* text eol=lf
+*.sh text eol=lf

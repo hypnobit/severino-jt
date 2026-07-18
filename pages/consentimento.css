@@ -1,0 +1,19 @@
+/* consentimento.css — tela do termo de aceite; carregar depois de base.css. */
+
+main{max-width:640px}
+
+/* Override do .topo do base.css (max-width:760px) — solto p/ o texto centrar na página toda. */
+.topo{text-align:center}
+.topo p{max-width:none}
+
+#termo,#aceito{text-align:center}
+
+#termo p{margin:0 0 12px;font-size:14px;color:var(--texto)}
+#termo p:last-of-type{margin-bottom:0}
+
+.nota-fonte{color:var(--texto-suave);font-size:12.5px}
+.pergunta{margin-top:18px}
+
+.termo-acoes{display:flex;gap:12px;margin-top:16px;justify-content:center}
+
+#aceito p{margin:0;font-size:14px;color:var(--texto)}

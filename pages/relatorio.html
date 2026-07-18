@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Severino JT · Histórico</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="relatorio.css">
+</head>
+<body>
+
+  <header>
+    <h1>📋 Histórico PJe</h1>
+    <span id="data-hoje"></span>
+  </header>
+
+  <nav>
+    <button id="btn-aba-consultas" class="ativa">🔍 Processos Consultados</button>
+    <button id="btn-aba-assinaturas">✍️ Documentos Assinados</button>
+  </nav>
+
+  <!-- ABA: CONSULTAS -->
+  <div id="aba-consultas" class="aba visivel">
+    <div class="sumario">
+      <div class="card">
+        <div class="numero" id="total-consultas">—</div>
+        <div class="rotulo">Acessos</div>
+      </div>
+      <div class="card">
+        <div class="numero" id="total-unicos">—</div>
+        <div class="rotulo">Processos únicos</div>
+      </div>
+    </div>
+    <div class="container-tabela">
+      <table>
+        <thead><tr><th>#</th><th>Processo</th><th>Horário</th></tr></thead>
+        <tbody id="tabela-consultas"></tbody>
+      </table>
+    </div>
+    <div class="acoes">
+      <button class="btn btn-copiar"   id="copiar-consultas">📋 Copiar lista</button>
+      <button class="btn btn-exportar" id="exportar-consultas">💾 Exportar .txt</button>
+      <button class="btn btn-limpar"   id="btn-limpar-c">🗑️ Limpar consultas</button>
+    </div>
+  </div>
+
+  <!-- ABA: ASSINATURAS -->
+  <div id="aba-assinaturas" class="aba">
+    <div class="sumario">
+      <div class="card">
+        <div class="numero" id="total-assinaturas">—</div>
+        <div class="rotulo">Assinaturas</div>
+      </div>
+      <div class="card">
+        <div class="numero" id="total-processos-assinados">—</div>
+        <div class="rotulo">Processos distintos</div>
+      </div>
+    </div>
+    <div class="container-tabela">
+      <table>
+        <thead><tr><th>#</th><th>Processo</th><th>Contexto</th><th>Horário</th></tr></thead>
+        <tbody id="tabela-assinaturas"></tbody>
+      </table>
+    </div>
+    <div class="acoes">
+      <button class="btn btn-copiar"   id="copiar-assinaturas">📋 Copiar lista</button>
+      <button class="btn btn-exportar" id="exportar-assinaturas">💾 Exportar .txt</button>
+      <button class="btn btn-limpar"   id="btn-limpar-a">🗑️ Limpar assinaturas</button>
+    </div>
+  </div>
+
+  <footer>Severino JT</footer>
+
+  <script src="../lib/consentimento.js"></script>
+  <script src="relatorio.js"></script>
+</body>
+</html>

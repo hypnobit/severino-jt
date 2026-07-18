@@ -1,0 +1,12 @@
+# Artefatos de empacotamento
+*.zip
+*.xpi
+web-ext-artifacts/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/

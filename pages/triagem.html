@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triagem Inicial — Severino JT</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="triagem.css">
+</head>
+<body>
+
+<div class="topo">
+  <h1>Triagem Inicial</h1>
+  <p id="proc-numero" class="proc-numero" hidden></p>
+  <p>Monta o dossiê do processo a partir da API do PJe: metadados, partes, rito, checklist documental, Resumo do Cálculo e texto integral da petição inicial.</p>
+</div>
+
+<main>
+  <div class="cartao">
+    <h2>Progresso <span class="spinner" id="spinner" hidden></span></h2>
+    <div id="log"></div>
+  </div>
+
+  <div class="cartao" id="selecaoPlanilha" hidden>
+    <h2>Planilha de cálculo não detectada</h2>
+    <p class="instrucao">As checagens automáticas não identificaram uma planilha do PJe-Calc — o que acontece quando ela é anexada com nome genérico (ex.: <code>123.pdf</code>). <strong>Verifique no processo</strong> se há planilha de cálculo:</p>
+    <ul class="selecao-ajuda">
+      <li>Se <strong>existe</strong>, selecione o anexo correspondente abaixo e clique em <em>Usar como planilha</em>.</li>
+      <li>Se <strong>não foi juntada</strong>, confirme — o dossiê seguirá informando a ausência.</li>
+    </ul>
+    <label class="rotulo-select" for="planilhaAnexo">Anexos da petição inicial:</label>
+    <select id="planilhaAnexo"></select>
+    <div class="selecao-acoes">
+      <button class="botao" id="btnUsarAnexo" type="button">Usar como planilha</button>
+      <button class="botao secundario" id="btnSemPlanilha" type="button">Confirmar: não há planilha</button>
+    </div>
+  </div>
+
+  <div class="cartao" id="resultado" hidden>
+    <h2>Dossiê</h2>
+    <div class="dossie-barra">
+      <div class="segmented" role="group" aria-label="Modo do dossiê">
+        <button class="seg-btn ativo" id="modo-completo" type="button">Completo</button>
+        <button class="seg-btn" id="modo-mascarado" type="button">Mascarado (p/ IA)</button>
+      </div>
+      <div class="dossie-acoes">
+        <button class="botao secundario" id="btnCopiar" type="button">📋 Copiar texto</button>
+        <button class="botao" id="btnBaixar" type="button">⬇ Baixar .md</button>
+      </div>
+    </div>
+    <p class="modo-nota" id="modo-nota"></p>
+    <div id="corteManual" hidden>
+      <p class="instrucao">Revise e <strong>apague à mão</strong> o preâmbulo de qualificação (nomes, CPF, endereço) que tenha sobrado. O texto retido ainda passa por redação automática — a prévia abaixo reflete o corte.</p>
+      <textarea id="corpoInicial" rows="10"></textarea>
+    </div>
+    <div id="previa" class="previa-md"></div>
+  </div>
+</main>
+
+<script src="../lib/consentimento.js"></script>
+<script src="../lib/vendor/pdf.js"></script>
+<script src="../lib/api.js"></script>
+<script src="../lib/csv.js"></script>
+<script src="../lib/resumo-calculo.js"></script>
+<script src="../lib/markdown.js"></script>
+<script src="triagem.js"></script>
+
+</body>
+</html>

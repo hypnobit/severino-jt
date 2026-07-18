@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termo de consentimento — Severino JT</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="consentimento.css">
+</head>
+<body>
+
+<div class="topo">
+  <h1>⚖️ Severino JT</h1>
+  <p>Termo de consentimento</p>
+</div>
+
+<main>
+  <div class="cartao" id="termo">
+    <h2>Aviso legal — leia com atenção</h2>
+    <p>A extensão <strong>Severino JT</strong> não faz parte do PJe: é um programa independente que agrega funcionalidades ao sistema.</p>
+    <p>Para funcionar, ela precisa acessar os dados exibidos na sua sessão autenticada do PJe, que incluem dados pessoais das partes. Esse acesso é <strong>obrigatório</strong> — a extensão não funciona sem ele. <strong>Caso não concorde, ela será desinstalada automaticamente.</strong></p>
+    <p>Como servidor, você é responsável pela guarda dos dados processuais de terceiros a que tem acesso.</p>
+    <p class="nota-fonte"><em>Projeto de código aberto.</em></p>
+    <p class="pergunta"><strong>Você concorda com os termos apresentados?</strong></p>
+    <div class="termo-acoes">
+      <button class="botao" id="btnConcordo" type="button">Concordo</button>
+      <button class="botao secundario" id="btnRecuso" type="button">Não concordo</button>
+    </div>
+  </div>
+
+  <div class="cartao" id="aceito" hidden>
+    <h2>Consentimento registrado</h2>
+    <p>Tudo certo — você já pode usar a extensão. Pode fechar esta aba.</p>
+  </div>
+</main>
+
+<script src="../lib/consentimento.js"></script>
+<script src="consentimento.js"></script>
+
+</body>
+</html>

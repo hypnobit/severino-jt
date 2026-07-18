@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extrator de Resumo do Cálculo — PJe-Calc</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="extrator.css">
+</head>
+<body>
+
+<div class="topo">
+  <h1>Extrator de Resumo do Cálculo (PJe-Calc)</h1>
+  <p>Lê a "Planilha de Cálculo" em PDF gerada pelo PJe-Calc e extrai as três tabelas do Resumo do Cálculo (Bruto Devido ao Reclamante, Créditos e Descontos do Reclamante, Débitos do Reclamado por Credor).</p>
+</div>
+
+<main>
+
+  <div class="banner-diagnostico" id="bannerDiagnostico">
+    <strong>Este navegador não conseguiu inicializar o motor de leitura de PDF.</strong>
+    <span id="textoDiagnostico">Tente abrir este mesmo arquivo em outro navegador (Chrome, Edge ou Firefox atualizados). Se o problema persistir, copie a mensagem de erro abaixo e mostre a quem te ajudou a criar esta ferramenta.</span>
+    <div id="detalheErroDiagnostico" style="margin-top:8px; font-family:var(--mono); font-size:11.5px; word-break:break-all;"></div>
+  </div>
+
+  <div class="cartao">
+    <h2>1. Selecione um ou mais PDFs</h2>
+    <div class="zona-arquivo" id="zonaArquivo">
+      <p>Arraste os PDFs aqui, ou</p>
+      <button class="botao secundario" id="btnEscolher">Escolher arquivos</button>
+      <input type="file" id="inputArquivo" accept="application/pdf" multiple>
+      <div class="lista-arquivos" id="listaArquivos"></div>
+    </div>
+    <div class="acoes">
+      <button class="botao" id="btnProcessar" disabled>Processar</button>
+      <button class="botao secundario" id="btnLimpar">Limpar</button>
+    </div>
+  </div>
+
+  <div id="resultados"></div>
+
+</main>
+
+<script src="../lib/consentimento.js"></script>
+<script src="../lib/vendor/pdf.js"></script>
+<script src="../lib/csv.js"></script>
+<script src="../lib/resumo-calculo.js"></script>
+<script src="extrator.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+#!/bin/sh
+# Gate de integração contínua: nenhum push sai com teste vermelho.
+# Rastreado no repo e ativado por `git config core.hooksPath scripts/git-hooks`.
+# Node portátil vive fora do repo (../.node), então nunca vaza para o .xpi.
+# Caminho relativo à raiz do working tree (cwd do hook) — evita o acento de "Extensões".
+
+NODE="../.node/node.exe"
+
+if [ ! -x "$NODE" ]; then
+  echo "pre-push: node portátil não encontrado em $NODE — veja a seção Testes e CI do AGENTS.md" >&2
+  exit 1
+fi
+
+echo "pre-push: rodando node --test ..."
+"$NODE" --test

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../pages/tokens.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <header>
+    <span class="logo">⚖️ Severino JT</span>
+    <span class="versao" id="versao"></span>
+  </header>
+
+  <section>
+    <h2>Triagem inicial</h2>
+    <button id="btn-triagem">⚖️ Gerar dossiê do processo aberto</button>
+    <p id="aviso-triagem" class="aviso" hidden>Abra um processo no PJe primeiro.</p>
+  </section>
+
+  <section>
+    <h2>E-Carta em lote</h2>
+    <button id="btn-ecarta">📮 Consultar processos</button>
+    <p id="aviso-ecarta" class="aviso" hidden>Abra a página "Consultar Processos" do E-Carta.</p>
+  </section>
+
+  <section>
+    <h2>Extrator de cálculo</h2>
+    <button id="btn-extrator">📄 Abrir extrator</button>
+  </section>
+
+  <section>
+    <h2>Histórico do dia</h2>
+    <button id="btn-historico">📋 Abrir relatório</button>
+  </section>
+
+  <section>
+    <h2>Tema escuro (documentos)</h2>
+    <select id="sel-tema">
+      <option value="">Desativado</option>
+      <option value="sepia">Sépia Escuro</option>
+      <option value="vscode">VSCode Dark+</option>
+      <option value="onedark">One Dark</option>
+      <option value="solarized">Solarized Dark</option>
+      <option value="noite">Noite Suave</option>
+      <option value="papel">Papel Envelhecido</option>
+    </select>
+  </section>
+
+  <script src="../lib/consentimento.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

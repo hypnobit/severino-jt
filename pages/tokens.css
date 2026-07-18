@@ -1,0 +1,20 @@
+/* tokens.css — fonte única de cores/variáveis; linkar antes de qualquer outro CSS. */
+
+:root{
+  --azul-900:#0b2545;
+  --azul-700:#13315c;
+  --azul-500:#1d4e89;
+  --azul-100:#e7eef7;
+  --papel:#fafaf7;
+  --linha:#d9dde3;
+  --texto:#1c2430;
+  --texto-suave:#5b6472;
+  --verde:#1f7a4d;
+  --verde-bg:#e9f5ee;
+  --ambar:#8a5a00;
+  --ambar-bg:#fdf2dd;
+  --vermelho:#a32626;
+  --vermelho-bg:#fbeaea;
+  --radius:8px;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+}

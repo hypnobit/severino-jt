@@ -1,0 +1,36 @@
+/* base.css — componentes compartilhados (reset, body, topo, cartão, botões).
+   Carregar tokens.css antes deste, e este antes do <pagina>.css. */
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--papel);color:var(--texto);
+  font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;line-height:1.5;
+}
+
+/* ── Topo (banner) ────────────────────────────────────────────────────────── */
+.topo{background:var(--azul-900);color:#fff;padding:28px 32px 24px}
+.topo h1{margin:0 0 6px;font-size:22px;font-weight:600;letter-spacing:.01em}
+.topo p{margin:0;color:#cfd9e8;font-size:13.5px;max-width:760px}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+main{max-width:900px;margin:0 auto;padding:28px 32px 60px}
+.cartao{
+  background:#fff;border:1px solid var(--linha);border-radius:var(--radius);
+  padding:22px 24px;margin-bottom:20px;
+}
+.cartao h2{
+  font-size:14px;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--texto-suave);margin:0 0 14px;
+}
+
+/* ── Botões ───────────────────────────────────────────────────────────────── */
+.botao{
+  display:inline-flex;align-items:center;gap:6px;border:none;border-radius:6px;
+  padding:9px 16px;font-size:13.5px;font-weight:600;cursor:pointer;
+  background:var(--azul-500);color:#fff;
+}
+.botao:hover{background:var(--azul-700)}
+.botao.secundario{background:#fff;color:var(--azul-700);border:1px solid var(--azul-500)}
+.botao.secundario:hover{background:var(--azul-100)}
+.botao:disabled{opacity:.5;cursor:not-allowed}
+.botao:focus-visible{outline:2px solid var(--azul-500);outline-offset:2px}

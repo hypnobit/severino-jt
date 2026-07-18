@@ -1,0 +1,72 @@
+/* triagem.css — específico da Triagem; topo/cartão/botões vêm de base.css. */
+
+#log{
+  font-family:var(--mono);font-size:12.5px;max-height:260px;overflow:auto;
+  background:#f4f5f7;border-radius:6px;padding:10px 12px;
+}
+#log .linha{padding:1px 0}
+#log .linha.erro{color:var(--vermelho);font-weight:600}
+
+.proc-numero{margin:2px 0 8px;color:#fff;font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:.02em}
+
+.spinner{display:inline-block;width:11px;height:11px;border:2px solid var(--linha);border-top-color:var(--azul-500);border-radius:50%;animation:girar .7s linear infinite;vertical-align:middle;margin-left:6px}
+.spinner[hidden]{display:none}   /* a classe define display:inline-block e sobrepõe o [hidden] da UA */
+@keyframes girar{to{transform:rotate(360deg)}}
+
+/* ── Barra de modo do dossiê (seletor + ações) ────────────────────────────── */
+.dossie-barra{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.segmented{display:inline-flex;border:1px solid var(--azul-500);border-radius:6px;overflow:hidden}
+.seg-btn{padding:7px 14px;border:none;background:#fff;color:var(--azul-700);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.seg-btn+.seg-btn{border-left:1px solid var(--azul-500)}
+.seg-btn.ativo{background:var(--azul-500);color:#fff}
+.seg-btn:focus-visible{outline:2px solid var(--azul-500);outline-offset:2px}
+.dossie-acoes{display:flex;gap:8px}
+/* Baixar no modo mascarado: levemente diferente do completo (azul mais escuro) */
+.botao.mascarado{background:var(--azul-700)}
+.botao.mascarado:hover{background:var(--azul-900)}
+.modo-nota{font-size:12px;margin:0 0 12px;line-height:1.4}
+.modo-nota.pii{color:var(--vermelho)}
+.modo-nota.seguro{color:var(--texto-suave)}
+
+#corteManual{margin-top:4px;margin-bottom:12px}
+#corteManual .instrucao{font-size:13px;color:var(--texto-suave);margin:0 0 8px}
+#corpoInicial{
+  width:100%;font-family:var(--mono);font-size:12px;line-height:1.5;
+  border:1px solid var(--linha);border-radius:6px;padding:10px;resize:vertical;
+  min-height:160px;
+}
+
+/* ── Seleção manual da planilha (4ª camada — humano no loop) ───────────────── */
+#selecaoPlanilha .instrucao{font-size:13.5px;line-height:1.5;margin:0 0 10px}
+.selecao-ajuda{font-size:13px;line-height:1.5;margin:0 0 14px;padding-left:20px;color:var(--texto-suave)}
+.selecao-ajuda li{margin:3px 0}
+.rotulo-select{display:block;font-size:12px;font-weight:600;color:var(--texto-suave);margin:0 0 4px}
+#planilhaAnexo{
+  width:100%;font-family:inherit;font-size:13px;padding:8px 10px;
+  border:1px solid var(--linha);border-radius:6px;background:#fff;color:var(--texto);
+}
+#planilhaAnexo:focus-visible{outline:2px solid var(--azul-500);outline-offset:2px}
+.selecao-acoes{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* ── Prévia com markdown renderizado ──────────────────────────────────────── */
+.previa-md{
+  max-height:520px;overflow:auto;background:#fff;border:1px solid var(--linha);
+  border-radius:6px;padding:16px 20px;font-size:13.5px;line-height:1.55;
+}
+.previa-md h1{font-size:19px;margin:0 0 10px}
+.previa-md h2{font-size:16px;margin:18px 0 8px;text-transform:none;letter-spacing:0;color:var(--texto)}
+.previa-md h3{font-size:14px;margin:14px 0 6px}
+.previa-md h4{font-size:13px;margin:12px 0 6px;color:var(--texto-suave)}
+.previa-md p{margin:0 0 10px}
+.previa-md ul{margin:0 0 10px;padding-left:20px}
+.previa-md li{margin:2px 0}
+.previa-md blockquote{margin:0 0 10px;padding:8px 12px;border-left:3px solid var(--azul-500);background:#f4f5f7;color:var(--texto-suave);border-radius:0 6px 6px 0}
+.previa-md hr{border:none;border-top:1px solid var(--linha);margin:16px 0}
+.previa-md code{font-family:var(--mono);font-size:12px;background:#f4f5f7;padding:1px 4px;border-radius:3px}
+.previa-md pre{background:#f4f5f7;border:1px solid var(--linha);border-radius:6px;padding:10px 12px;overflow:auto;margin:0 0 10px}
+.previa-md pre code{background:none;padding:0;white-space:pre-wrap;word-break:break-word}
+.previa-md table{border-collapse:collapse;width:100%;margin:0 0 12px;font-size:12.5px}
+.previa-md th,.previa-md td{border:1px solid var(--linha);padding:5px 8px;text-align:left}
+.previa-md th{background:var(--azul-100);color:var(--azul-700);font-weight:600}
+.previa-md td{font-variant-numeric:tabular-nums}
+.previa-md strong{font-weight:600}

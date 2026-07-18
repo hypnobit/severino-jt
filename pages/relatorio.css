@@ -1,0 +1,121 @@
+/* relatorio.css — Relatório do histórico do dia. Paleta em tokens.css (linkar antes). */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Abre como aba, não popup: coluna centralizada emoldurada pelo fundo da aba. */
+html { background: var(--linha); }
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  background: var(--papel);
+  color: var(--texto);
+  max-width: 760px;
+  margin: 0 auto;
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(11,37,69,.12);
+}
+
+header {
+  background: var(--azul-900);
+  color: #fff;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 { font-size: 15px; font-weight: 600; }
+header span { font-size: 11px; opacity: 0.85; }
+
+nav {
+  display: flex;
+  background: #fff;
+  border-bottom: 2px solid var(--linha);
+}
+nav button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--texto-suave);
+  border-bottom: 3px solid transparent;
+  transition: all 0.15s;
+}
+nav button:hover { background: var(--papel); color: var(--azul-700); }
+nav button.ativa { color: var(--azul-700); border-bottom-color: var(--azul-500); font-weight: 600; }
+
+.aba { display: none; padding: 12px; }
+.aba.visivel { display: block; }
+
+.sumario { display: flex; gap: 8px; margin-bottom: 12px; }
+.card {
+  flex: 1;
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.card .numero { font-size: 28px; font-weight: 700; color: var(--azul-500); line-height: 1.1; }
+.card .rotulo { font-size: 11px; color: var(--texto-suave); margin-top: 2px; }
+
+.container-tabela {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+  max-height: 300px;
+  overflow-y: auto;
+}
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  background: var(--azul-100);
+  color: var(--azul-700);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 10px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+}
+tbody tr { border-bottom: 1px solid #f0f0f0; }
+tbody tr:hover { background: var(--azul-100); }
+tbody tr:last-child { border-bottom: none; }
+tbody td { padding: 7px 10px; font-size: 12px; color: var(--texto); }
+td.numero-processo { font-family: var(--mono); font-size: 11px; white-space: nowrap; }
+td.hora { color: var(--texto-suave); font-size: 11px; white-space: nowrap; }
+td.contexto { font-size: 11px; }
+
+.vazio { text-align: center; padding: 40px 20px; color: var(--texto-suave); font-size: 13px; }
+.vazio span { display: block; font-size: 32px; margin-bottom: 8px; }
+
+.acoes { display: flex; gap: 6px; margin-top: 10px; }
+.btn {
+  flex: 1;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.85; }
+nav button:focus-visible, .btn:focus-visible { outline: 2px solid var(--azul-500); outline-offset: 2px; }
+.btn-copiar   { background: var(--azul-500); color: #fff; }
+.btn-exportar { background: var(--verde); color: #fff; }
+.btn-limpar   { background: #e0e0e0; color: #555; }
+
+footer {
+  padding: 8px 12px;
+  font-size: 10px;
+  color: var(--texto-suave);
+  text-align: center;
+  border-top: 1px solid var(--linha);
+  background: #fff;
+}
