@@ -23,6 +23,8 @@ Duas decisões moldaram a forma atual:
 - **Cada tema é uma estratégia intercambiável** — um par "fundo + filtro". Adicionar um novo preset é acrescentar uma linha, sem mexer na lógica.
 - **Só CSS, sem ficar vigiando a página.** O filtro é escrito de um jeito que já alcança as páginas atuais e as que forem sendo desenhadas conforme você rola o documento — sem precisar de um observador ativo repetindo trabalho.
 
+Se um preset é removido em um update (como aconteceu com os quatro temas descontinuados na v0.1.3), quem tinha aquela chave salva não fica com o tema silenciosamente desativado: `background.js` migra `pjt_tema` para um fallback válido (`helpers.migrarTema`) no `onInstalled` do próprio update.
+
 ### Método de estudo
 
 O visualizador de PDF do PJe é o **pdf.js**, o mesmo componente de código aberto da Mozilla usado em muitos lugares. Inspecionei como ele monta a página e percebi que cada página vira um elemento de imagem previsível — e é sobre esse alvo que o filtro é aplicado. A extensão não altera o PDF nem o visualizador; só sobrepõe estilo.

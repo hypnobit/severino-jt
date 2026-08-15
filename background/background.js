@@ -5,6 +5,11 @@ const LOG              = '[PJeTools BG]'
 
 const ultimasAssinaturas = {}
 
+// Manter em sincronia com as chaves de TEMAS em modules/dark-theme.js.
+const CHAVE_TEMA      = 'pjt_tema'
+const TEMAS_VALIDOS   = ['sepia', 'papel']
+const TEMA_FALLBACK   = 'sepia'
+
 browser.webRequest.onBeforeRequest.addListener(
   detalhes => {
     try { processarRequisicao(detalhes) }
@@ -17,6 +22,16 @@ browser.runtime.onInstalled.addListener(async detalhes => {
   if (detalhes.reason === 'install' ||
       (detalhes.reason === 'update' && !(await window.PjeTools.consentimento.concedido()))) {
     browser.tabs.create({ url: browser.runtime.getURL('pages/consentimento.html') })
+  }
+
+  if (detalhes.reason === 'update') {
+    const { helpers } = window.PjeTools
+    const r    = await browser.storage.local.get(CHAVE_TEMA)
+    const novo = helpers.migrarTema(r[CHAVE_TEMA], TEMAS_VALIDOS, TEMA_FALLBACK)
+    if (novo) {
+      await browser.storage.local.set({ [CHAVE_TEMA]: novo })
+      console.log(LOG, `Tema '${r[CHAVE_TEMA]}' não existe mais — migrado para '${novo}'.`)
+    }
   }
 })
 

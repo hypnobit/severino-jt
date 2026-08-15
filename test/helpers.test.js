@@ -29,3 +29,19 @@ test('escapar trata null e undefined como string vazia', () => {
 test('dataHoje devolve ISO YYYY-MM-DD', () => {
   assert.match(helpers.dataHoje(), /^\d{4}-\d{2}-\d{2}$/)
 })
+
+// migrarTema: decide se um valor salvo em storage precisa ser trocado por um
+// fallback válido após a remoção de presets (ver modules/dark-theme.js TEMAS).
+test('migrarTema: chave já válida → null (nada a fazer)', () => {
+  assert.equal(helpers.migrarTema('sepia', ['sepia', 'papel'], 'sepia'), null)
+})
+
+test('migrarTema: chave removida (ex.: preset descontinuado) → cai no fallback', () => {
+  assert.equal(helpers.migrarTema('vscode', ['sepia', 'papel'], 'sepia'), 'sepia')
+})
+
+test('migrarTema: nada selecionado (null/undefined/vazio) → null (não força tema)', () => {
+  assert.equal(helpers.migrarTema(null, ['sepia', 'papel'], 'sepia'), null)
+  assert.equal(helpers.migrarTema(undefined, ['sepia', 'papel'], 'sepia'), null)
+  assert.equal(helpers.migrarTema('', ['sepia', 'papel'], 'sepia'), null)
+})
