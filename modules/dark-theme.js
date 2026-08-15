@@ -8,12 +8,11 @@
     const CHAVE = 'pjt_tema'
 
     const TEMAS = {
-      sepia:      { nome: 'Sépia Escuro',      fundo: '#2a2318', filtro: 'invert(0.88) sepia(0.25) hue-rotate(10deg) contrast(0.9)' },
-  vscode:     { nome: 'VSCode Dark+',      fundo: '#1e1e1e', filtro: 'invert(0.88) hue-rotate(180deg) saturate(1.1) contrast(0.9)' },
-  onedark:    { nome: 'One Dark',          fundo: '#282c34', filtro: 'invert(0.85) hue-rotate(185deg) saturate(1.2) contrast(0.88)' },
-  solarized:  { nome: 'Solarized Dark',    fundo: '#002b36', filtro: 'invert(0.87) hue-rotate(175deg) saturate(0.85) contrast(0.92)' },
-  noite:      { nome: 'Noite Suave',       fundo: '#1a1a2e', filtro: 'invert(0.85) hue-rotate(180deg) contrast(0.88)' },
-  papel:      { nome: 'Papel Envelhecido', fundo: '#1c1a14', filtro: 'invert(0.82) sepia(0.4) hue-rotate(15deg) contrast(0.85)' },
+      // Escuro: inverte o PDF (branco→escuro, preto→claro) e tinge de sépia.
+      sepia: { nome: 'Sépia Escuro',      fundo: '#2a2318', filtro: 'invert(0.88) sepia(0.25) hue-rotate(10deg) contrast(0.9)' },
+      // Claro: NÃO inverte — só afasta o branco puro, sépia parcial + brilho/contraste
+      // levemente reduzidos, para descanso da vista sem virar modo escuro.
+      papel: { nome: 'Papel Envelhecido', fundo: '#e8ddc7', filtro: 'sepia(0.25) brightness(0.97) contrast(0.96)' },
     }
 
     window.PjeTools.darkTheme = { TEMAS }

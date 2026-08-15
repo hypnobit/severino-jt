@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Severino JT",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Extensão de Firefox para o PJe da Justiça do Trabalho (TRT): histórico de acessos, tema escuro, e-carta em lote, extrator de cálculo e triagem inicial.",
   "author": "hypnobit",
   "browser_specific_settings": {

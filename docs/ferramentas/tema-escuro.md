@@ -1,20 +1,22 @@
 # Tema escuro
 
-Um tema escuro no visualizador de PDF do PJe, com vários presets de cor, para leituras longas com menos cansaço visual.
+Dois temas para o visualizador de PDF do PJe — um escuro e um claro com tom de papel envelhecido — para leituras longas com menos cansaço visual.
 
 ## O que faz
 
-Aplica um filtro de cor e um fundo escuro sobre o visualizador de PDF do PJe; oferece vários presets de tema; reaplica o tema escolhido às páginas conforme você rola o documento.
+Aplica um filtro de cor (e, no tema escuro, um fundo escuro) sobre o visualizador de PDF do PJe; reaplica o tema escolhido às páginas conforme você rola o documento.
 
 ## Como usar
 
 Abra o **popup da extensão**, escolha um dos temas e abra (ou volte para) um documento no visualizador de PDF do PJe. O tema é aplicado na hora e vale para as próximas páginas do documento.
 
-Presets disponíveis: Sépia Escuro, VSCode Dark+, One Dark, Solarized Dark, Noite Suave e Papel Envelhecido.
+Temas disponíveis:
+- **Sépia Escuro** — inverte o PDF (fundo escuro, texto claro), com tinta sépia.
+- **Papel Envelhecido** — claro, não inverte; só afasta o branco puro do papel com sépia parcial e brilho/contraste levemente reduzidos, para descanso da vista sem virar modo escuro.
 
 ## Como funciona
 
-O visualizador de PDF não é texto na página — cada página é desenhada como imagem. Não dá, portanto, para "trocar a cor da fonte". O caminho é aplicar um **filtro de cor** por cima da página (inversão + ajuste de matiz) junto com um fundo escuro, de modo que o branco do papel vire escuro e o texto preto vire claro, preservando a legibilidade.
+O visualizador de PDF não é texto na página — cada página é desenhada como imagem. Não dá, portanto, para "trocar a cor da fonte". O caminho é aplicar um **filtro de cor** por cima da página, de modo que o branco do papel vire escuro e o texto preto vire claro no tema escuro (inversão), ou apenas ganhe um tom quente no tema claro (sem inversão), preservando a legibilidade.
 
 Duas decisões moldaram a forma atual:
 

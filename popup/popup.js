@@ -4,7 +4,7 @@ const CHAVE_TEMA = 'pjt_tema'
 
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('versao').textContent =
-    `v${browser.runtime.getManifest().version} · alpha`
+    `v${browser.runtime.getManifest().version} · beta`
 
   if (!(await window.PjeTools.consentimento.concedido())) {
     mostrarPendente()
