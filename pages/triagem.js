@@ -10,9 +10,10 @@
 
   // ── Configuração ──────────────────────────────────────────────────────────
 
-  // ATENÇÃO: atualizar a cada reajuste (teto do sumaríssimo = 40 salários mínimos).
+  // ATENÇÃO: atualizar a cada reajuste (teto do sumaríssimo = 40 SM; teto de alçada = 2 SM).
   const SALARIO_MINIMO   = 1621.00           // Decreto 12.797/2025, vigente desde 01/01/2026
   const TETO_SUMARISSIMO = SALARIO_MINIMO * 40   // R$ 64.840,00
+  const TETO_ALCADA      = SALARIO_MINIMO * 2    // R$ 3.242,00 — Lei 5.584/70, art. 2º, §§3º-4º
 
   // Nome gerado pelo próprio PJe-Calc; o número casa com o "Cálculo: N" impresso no PDF
   const PADRAO_PLANILHA        = /^RELATORIO_CALCULO_(\d+)_DATA_\d{8}_HORA_\d{6}$/i
@@ -363,16 +364,37 @@
       }
     }
 
+    if (valorCausa <= TETO_ALCADA) {
+      return {
+        atribuido,
+        conclusao: 'SUMÁRIO (alçada)',
+        motivo: `Valor da causa (${moeda(valorCausa)}) não excede o teto de alçada de ${moeda(TETO_ALCADA)} (2 × ${moeda(SALARIO_MINIMO)} — Lei 5.584/70, art. 2º, §§3º-4º), e nenhum réu tem natureza jurídica de direito público. Sentença de alçada é irrecorrível, salvo violação constitucional (Súmula 356/TST) — por isso incompatível com ente público, cuja condenação admite reexame necessário/recurso (Art. 496, I, CPC).`,
+        avisos
+      }
+    }
+
     return valorCausa < TETO_SUMARISSIMO
       ? { atribuido, conclusao: 'SUMARÍSSIMO', motivo: `Valor da causa (${moeda(valorCausa)}) inferior ao teto de ${moeda(TETO_SUMARISSIMO)}, e nenhum réu tem natureza jurídica de direito público. Empresa pública e sociedade de economia mista, quando presentes, não impedem o sumaríssimo.`, avisos }
       : { atribuido, conclusao: 'ORDINÁRIO',   motivo: `Valor da causa (${moeda(valorCausa)}) igual ou superior ao teto de ${moeda(TETO_SUMARISSIMO)}.`, avisos }
   }
 
+  // Classifica um rótulo de rito em uma de três categorias (ou null, se não reconhecido).
+  // "sumário" e "sumaríssimo" nunca colidem: a fronteira \b barra "sumar[íi]o" de casar
+  // dentro de "sumaríssimo" (que segue com "ssimo", não com fim de palavra).
+  function classificarRotuloRito(texto) {
+    if (/sumar[íi]ssimo/i.test(texto)) return 'SUMARÍSSIMO'
+    if (/sum[áa]rio\b/i.test(texto))   return 'SUMÁRIO'
+    if (/ordin[áa]rio/i.test(texto))   return 'ORDINÁRIO'
+    return null
+  }
+
   function divergenciaDeRito(rito) {
     if (rito.conclusao === 'INDETERMINADO') return null
-    const atribuidoSumarissimo = /sumar[íi]ssimo/i.test(rito.atribuido)
-    const calculadoSumarissimo = rito.conclusao.startsWith('SUMARÍSSIMO')
-    return atribuidoSumarissimo === calculadoSumarissimo
+    const atribuido = classificarRotuloRito(rito.atribuido)
+    const calculado  = classificarRotuloRito(rito.conclusao)
+    // Rótulo atribuído não reconhecido: fail-closed, não afirma divergência sem confiança.
+    if (atribuido === null || calculado === null) return null
+    return atribuido === calculado
       ? null
       : `Rito atribuído pelo advogado ("${rito.atribuido}") diverge da checagem automática ("${rito.conclusao}").`
   }

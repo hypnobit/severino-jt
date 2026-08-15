@@ -10,7 +10,7 @@ const { test } = require('node:test')
 const assert = require('node:assert/strict')
 
 const {
-  classificarNaturezaJuridica, analisarRito, checarQualificacao, checarDocumentos, anexosDiversos, localizarPlanilha,
+  classificarNaturezaJuridica, analisarRito, divergenciaDeRito, checarQualificacao, checarDocumentos, anexosDiversos, localizarPlanilha,
   iniciais, mascararCnpj, recortarQualificacao, montarMarkdown, redigirNomes, redigirFormatos, montarTextoPagina
 } = require('../pages/triagem.js')
 
@@ -154,6 +154,75 @@ test('teto do PJe divergente da constante gera aviso de SALARIO_MINIMO desatuali
   const classeVelha = { ...classeSumarissimo, tetoValorCausa: 60720 } // teto de 2025
   const r = analisarRito(50000, [autor, reuLtda], classeVelha)
   assert.ok(r.avisos.some(a => /SALARIO_MINIMO/.test(a)))
+})
+
+// Teto de alçada: Lei 5.584/70, art. 2º, §§3º-4º — 2 × salário mínimo (R$ 1.621,00 = R$ 3.242,00).
+// Sentença de alçada é irrecorrível (salvo violação constitucional, Súmula 356/TST), por isso
+// incompatível com ente público — Art. 496, I, CPC impõe reexame necessário/recurso à Fazenda Pública.
+test('valor dentro do teto de alçada, só réu privado → SUMÁRIO (alçada)', () => {
+  const r = analisarRito(3000, [autor, reuLtda], classeSumarissimo)
+  assert.equal(r.conclusao, 'SUMÁRIO (alçada)')
+  assert.match(r.motivo, /al[çc]ada/i)
+})
+
+test('valor exatamente no teto de alçada (R$ 3.242,00) → SUMÁRIO (alçada), fronteira inclusiva', () => {
+  const r = analisarRito(3242, [autor, reuLtda], classeSumarissimo)
+  assert.equal(r.conclusao, 'SUMÁRIO (alçada)')
+})
+
+test('valor logo acima do teto de alçada → SUMARÍSSIMO, não SUMÁRIO', () => {
+  const r = analisarRito(3242.01, [autor, reuLtda], classeSumarissimo)
+  assert.equal(r.conclusao, 'SUMARÍSSIMO')
+})
+
+test('ente público no polo passivo dentro do valor de alçada → ORDINÁRIO, nunca SUMÁRIO', () => {
+  const r = analisarRito(3000, [autor, reuEstado], classeSumarissimo)
+  assert.equal(r.conclusao, 'ORDINÁRIO')
+})
+
+// ── divergenciaDeRito ────────────────────────────────────────────────────────
+
+test('rito atribuído e calculado coincidem (sumaríssimo) → sem divergência', () => {
+  const rito = { atribuido: 'Ação Trabalhista - Rito Sumaríssimo', conclusao: 'SUMARÍSSIMO' }
+  assert.equal(divergenciaDeRito(rito), null)
+})
+
+test('rito atribuído e calculado coincidem (ordinário) → sem divergência', () => {
+  const rito = { atribuido: 'Ação Trabalhista - Rito Ordinário', conclusao: 'ORDINÁRIO' }
+  assert.equal(divergenciaDeRito(rito), null)
+})
+
+test('rito atribuído e calculado coincidem (sumário/alçada) → sem divergência', () => {
+  const rito = { atribuido: 'Ação Trabalhista - Rito Sumário', conclusao: 'SUMÁRIO (alçada)' }
+  assert.equal(divergenciaDeRito(rito), null)
+})
+
+test('advogado atribuiu sumaríssimo, mas o valor é de alçada → divergência apontada', () => {
+  // Este é o bug da issue: antes, "sumário" e "ordinário" caíam no mesmo balaio de
+  // "não é sumaríssimo" e a checagem automática sempre respondia SUMARÍSSIMO abaixo do teto de 40 SM.
+  const rito = { atribuido: 'Ação Trabalhista - Rito Sumaríssimo', conclusao: 'SUMÁRIO (alçada)' }
+  const d = divergenciaDeRito(rito)
+  assert.match(d, /diverge/)
+  assert.match(d, /Sumaríssimo/)
+  assert.match(d, /SUMÁRIO \(alçada\)/)
+})
+
+test('advogado atribuiu ordinário, mas o valor é de alçada → divergência apontada (regressão do bug binário)', () => {
+  // Sob o esquema binário antigo, ORDINÁRIO e SUMÁRIO eram ambos "não sumaríssimo" e
+  // a comparação (false === false) escondia essa divergência.
+  const rito = { atribuido: 'Ação Trabalhista - Rito Ordinário', conclusao: 'SUMÁRIO (alçada)' }
+  const d = divergenciaDeRito(rito)
+  assert.match(d, /diverge/)
+})
+
+test('rótulo atribuído não reconhecido → sem afirmação de divergência (fail-closed)', () => {
+  const rito = { atribuido: 'Procedimento Especial Desconhecido', conclusao: 'SUMÁRIO (alçada)' }
+  assert.equal(divergenciaDeRito(rito), null)
+})
+
+test('conclusão INDETERMINADO nunca gera divergência', () => {
+  const rito = { atribuido: 'Ação Trabalhista - Rito Sumaríssimo', conclusao: 'INDETERMINADO' }
+  assert.equal(divergenciaDeRito(rito), null)
 })
 
 // ── checarDocumentos: modelo de 3 camadas ───────────────────────────────────

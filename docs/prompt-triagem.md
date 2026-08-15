@@ -5,6 +5,8 @@ Usado como prompt em ferramenta de IA (NotebookLM ou equivalente), com CLT, CPC 
 
 Quando `AGENTS.md` fala em "Passo 3" ou "Passo 5", é a este documento que se refere.
 
+> **Atualizado em 15/08/2026:** o Passo (4) RITO ganhou uma terceira faixa — **sumário (alçada)**, causas até 2 salários mínimos (Lei 5.584/70, art. 2º, §§3º-4º), sentença irrecorrível salvo violação constitucional. Até então o passo só reconhecia sumaríssimo/ordinário, então causas de alçada eram classificadas como sumaríssimo — o mesmo gap existia em `analisarRito` de `pages/triagem.js` (issue #1 do repositório), corrigido junto.
+>
 > **Atualizado em 17/07/2026 (v3 — interativo por menu):** o prompt deixou de ser uma resposta-monólito com os 5 passos e virou uma **ABERTURA automática** (declara modo completo/mascarado + inventário) seguida de um **menu** (`(1)…(5)`, `(F)`) — o usuário escolhe o passo, e cada um recebe uma resposta inteira. Motivo: o dossiê **mascarado** (uso principal) omite qualificação por projeto, e o prompt v2 lia isso como ausência, gerando `[CORREÇÃO NECESSÁRIA]` falso-positivo sistemático. A v3 introduz três estados epistêmicos (AUSENTE/REDIGIDO/NÃO-AVALIÁVEL) e várias correções de CLT×CPC (Art. 840 CLT como norma reitora, valor do pedido como estimativa, *jus postulandi* × procuração).
 >
 > **Atualizado em 09/07/2026:** o teto do rito sumaríssimo passou de R\$ 60.720,00 (40 × R\$ 1.518,00, salário mínimo de 2025) para **R\$ 64.840,00** (40 × R\$ 1.621,00, Decreto 12.797/2025, vigente desde 01/01/2026).
@@ -90,10 +92,11 @@ Quatro movimentos, listando tudo:
 Fechamentos: causa de pedir de cada pedido (fato + fundamento — Art. 840 §1º); horas extras trazem jornada e período?; soma dos pedidos × valor da causa em ordem de grandeza (Art. 291 CPC); defeito → extinção *daquele* pedido (Art. 840 §3º CLT, sanável por emenda) ou inépcia (Art. 330 §1º CPC).
 *Multa do Art. 467 CLT não exige valor prévio.*
 
-**(4) RITO** — teto do sumaríssimo = 40 SM = **R\$ 64.840,00** (desde 01/01/2026; sincronizar a cada reajuste).
-1. Valor da causa < R\$ 64.840,00?
-2. Ente Público da Adm. Direta, Autárquica ou Fundacional no polo passivo → **ordinário**, qualquer valor. *(Empresa Pública e Economia Mista não impedem o sumaríssimo.)*
-3. Se sumaríssimo: pedido líquido obrigatório (852-B, I) e edital vedado (852-B, II).
+**(4) RITO** — teto do sumaríssimo = 40 SM = **R\$ 64.840,00**; teto de alçada = 2 SM = **R\$ 3.242,00** (desde 01/01/2026; sincronizar os dois a cada reajuste).
+1. Valor da causa ≤ R\$ 3.242,00 (2 SM) e nenhum réu de direito público → **sumário (alçada)** — Lei 5.584/70, art. 2º, §§3º-4º. Sentença **irrecorrível**, salvo violação constitucional (Súmula 356/TST).
+2. Valor da causa > R\$ 3.242,00 e < R\$ 64.840,00 (40 SM) → **sumaríssimo**.
+3. Ente Público da Adm. Direta, Autárquica ou Fundacional no polo passivo → **ordinário**, qualquer valor — inclusive dentro da faixa de alçada: Art. 496, I, CPC impõe reexame necessário/recurso à Fazenda Pública, **incompatível** com a irrecorribilidade do rito de alçada. *(Empresa Pública e Economia Mista não impedem sumaríssimo nem alçada.)*
+4. Se sumaríssimo: pedido líquido obrigatório (852-B, I) e edital vedado (852-B, II).
 - Conclusão: o rito atribuído está correto?
 
 **(5) DOCUMENTAÇÃO** — existência ≠ conformidade (R4); o checklist lê só o campo `tipo`, não abre o arquivo. (a) Procuração com poderes específicos — *inaplicável em jus postulandi*; presença = OK de existência; "poderes específicos" = NÃO-AVALIÁVEL → ATENÇÃO; (b) documento oficial com foto (RG, CNH, CTPS física); (c) CTPS digital; (d) comprovante de residência.
@@ -116,5 +119,6 @@ Ausência no checklist = **ATENÇÃO ("não localizado")**, nunca ERRO duro (pod
 
 | Data | Alteração |
 |---|---|
+| 15/08/2026 | Passo (4) RITO: adicionada a faixa de **sumário (alçada)** (≤ 2 SM, Lei 5.584/70), antes ausente da especificação e por isso classificada como sumaríssimo. Corrigido junto com `analisarRito`/`divergenciaDeRito` em `pages/triagem.js` (issue #1). |
 | 17/07/2026 | **v3 — interativo por menu.** Substituído o formato monólito-5-passos por ABERTURA + MENU + resposta-por-passo. Introduzidos os três estados epistêmicos (AUSENTE/REDIGIDO/NÃO-AVALIÁVEL) para eliminar falso-positivo sistemático no dossiê mascarado. Correções de direito material: Art. 840 CLT como norma reitora (não CPC 319), valor do pedido como estimativa (não exige igualdade texto=planilha), sanção específica do Art. 840 §3º CLT distinta da inépcia do CPC, *jus postulandi* ligado à dispensa de procuração no Passo 5, vedação de edital e pedido líquido amarrados ao rito sumaríssimo (852-B), competência territorial (Art. 651 CLT), prescrição (sinalização apenas), gratuidade/hipossuficiência, valor da causa × soma dos pedidos. |
 | 09/07/2026 | Teto do sumaríssimo atualizado de R\$ 60.720,00 para R\$ 64.840,00 (Decreto 12.797/2025). Adicionadas notas de integração com o dossiê da extensão e ressalva sobre existência × conformidade no Passo 5. |
